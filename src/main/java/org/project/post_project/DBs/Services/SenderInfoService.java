@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @Slf4j
 public class SenderInfoService {
@@ -24,6 +26,7 @@ public class SenderInfoService {
         SenderInfoPk senderInfoPk = new SenderInfoPk(passport, phone);
         if(getSenderInfoByPk(senderInfoPk) != null) {
             log.warn("Отправитель уже существует!");
+            return null;
         }
         SenderInfo senderInfo = new SenderInfo();
         senderInfo.setSenderInfoPk(senderInfoPk);
@@ -38,6 +41,32 @@ public class SenderInfoService {
     }
 
     public SenderInfo getSenderInfoByPk(SenderInfoPk senderInfoPk) {
-        return senderInfoRepository.findBySenderInfoPk(senderInfoPk);
+        return senderInfoRepository.findBySenderInfoPk(senderInfoPk).orElse(null);
+    }
+
+    public SenderInfo updateSenderInfo(
+            Optional<String> fullName,
+            String passport,
+            String phone,
+            Optional<String> address) {
+        SenderInfoPk senderInfoPk = new SenderInfoPk(passport, phone);
+        SenderInfo senderInfo = getSenderInfoByPk(senderInfoPk);
+        if(senderInfo == null) {
+            log.warn("Отправитель не существует!");
+            return null;
+        }
+        fullName.ifPresent(senderInfo::setFullName);
+        address.ifPresent(senderInfo::setAddress);
+        return senderInfoRepository.save(senderInfo);
+    }
+
+    public void deleteSenderInfo(String passport, String phone) {
+        SenderInfoPk senderInfoPk = new SenderInfoPk(passport, phone);
+        SenderInfo senderInfo = getSenderInfoByPk(senderInfoPk);
+        if(senderInfo == null) {
+            log.warn("Отправитель не существует!");
+            return;
+        }
+        senderInfoRepository.delete(senderInfo);
     }
 }

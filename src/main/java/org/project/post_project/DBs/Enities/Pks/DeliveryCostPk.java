@@ -16,10 +16,10 @@ public class DeliveryCostPk implements Serializable {
     private String packageType;
 
     @Column(name = "size_category")
-    private Integer size;
+    private Byte size;
 
     @Column(name = "weight_category")
-    private Integer weight;
+    private Byte weight;
 
     @Column(name = "delivery_type")
     private String deliveryType;
@@ -27,7 +27,7 @@ public class DeliveryCostPk implements Serializable {
     @Column(name = "kilometers")
     private Integer kilometers;
 
-    private DeliveryCostPk(String packageType, Integer size, Integer weight, String deliveryType, Integer kilometers) {
+    public DeliveryCostPk(String packageType, Byte size, Byte weight, String deliveryType, Integer kilometers) {
         this.packageType = packageType;
         this.size = size;
         this.weight = weight;

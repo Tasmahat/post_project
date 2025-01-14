@@ -1,12 +1,13 @@
 package org.project.post_project.DBs.Enities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.project.post_project.DBs.Enities.Pks.DeliveryCostPk;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "delivery")
@@ -18,4 +19,8 @@ public class DeliveryCost {
 
     @Column(name = "cost_of_delivery")
     private Integer cost;
+
+    @Getter(AccessLevel.NONE)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "deliveryCost", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private Set<PackageInfo> packageInfos = new HashSet<>();
 }

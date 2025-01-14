@@ -18,11 +18,11 @@ public class PostDept {
     private String index;
 
     @Getter(AccessLevel.NONE)
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "postSendDept", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "postSendDept", cascade = CascadeType.REMOVE)
     private Set<DeliveryInfo> deliverySenderSet = new HashSet<>();
 
     @Getter(AccessLevel.NONE)
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "postReceiveDept", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "postReceiveDept", cascade = CascadeType.REMOVE)
     private Set<DeliveryInfo> deliveryReceiveSet = new HashSet<>();
 
     @Column(name = "region_send")

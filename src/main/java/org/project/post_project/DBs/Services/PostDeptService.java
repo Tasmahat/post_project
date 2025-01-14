@@ -27,6 +27,7 @@ public class PostDeptService {
             return null;
         }
         PostDept postDept = new PostDept();
+        postDept.setIndex(index);
         postDept.setRegion(region);
         postDept.setCity(city);
         postDept.setAddress(address);
@@ -39,7 +40,7 @@ public class PostDeptService {
     }
 
     public PostDept getPostDeptByIndex(String index) {
-        return postDeptRepository.findByIndex(index);
+        return postDeptRepository.findByIndex(index).orElse(null);
     }
 
     public PostDept updatePostDept(

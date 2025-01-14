@@ -4,10 +4,7 @@ import org.project.post_project.DBs.Enities.PostDept;
 import org.project.post_project.DBs.Services.PostDeptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -35,6 +32,11 @@ public class PostDeptController {
     @RequestMapping(method = RequestMethod.GET, path = "/all")
     public Page<PostDept> getAllPostDept() {
         return postDeptService.getAllPostDept();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/{index}")
+    public PostDept getPostDeptByIndex(@PathVariable String index) {
+        return postDeptService.getPostDeptByIndex(index);
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/update")

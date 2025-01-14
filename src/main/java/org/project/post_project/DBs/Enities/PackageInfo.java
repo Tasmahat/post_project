@@ -4,9 +4,6 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-import org.project.post_project.DBs.Enities.Pks.AdditionalServiceCostPk;
-import org.project.post_project.DBs.Enities.Pks.DeliveryCostPk;
-
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,13 +18,13 @@ public class PackageInfo {
     private Long id;
 
     @Getter(AccessLevel.NONE)
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "packageInfo", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "packageInfo", cascade = CascadeType.REMOVE)
     private Set<DeliveryInfo> deliverySet = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private DeliveryCost deliveryCost;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private AdditionalServiceCost additionalServiceCost;
 
     @Column(name = "date_of_sending")

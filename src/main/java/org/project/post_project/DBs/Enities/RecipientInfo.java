@@ -21,7 +21,7 @@ public class RecipientInfo {
     private String phone;
 
     @Getter(AccessLevel.NONE)
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "recipient", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "recipient", cascade = CascadeType.REMOVE)
     private Set<DeliveryInfo> deliverySet = new HashSet<>();
 
     @Column(name = "address_recipient")

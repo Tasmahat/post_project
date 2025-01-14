@@ -1,12 +1,11 @@
 package org.project.post_project.DBs.Enities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 import org.project.post_project.DBs.Enities.Pks.AdditionalServiceCostPk;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "additional_service")
@@ -18,4 +17,8 @@ public class AdditionalServiceCost {
 
     @Column(name = "cost_of_additional_service")
     private Integer cost;
+
+    @Getter(AccessLevel.NONE)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "additionalServiceCost", cascade = CascadeType.REMOVE)
+    private Set<PackageInfo> packageInfos = new HashSet<>();
 }

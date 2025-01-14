@@ -18,7 +18,7 @@ public class PostWorkers {
     private Long serviceNumber;
 
     @Getter(AccessLevel.NONE)
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "postWorkers", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "postWorkers", cascade = CascadeType.REMOVE)
     private Set<DeliveryInfo> deliverySet = new HashSet<>();
 
     @Column(name = "position_worker")
